@@ -1,0 +1,11 @@
+D:\project\VirtualIpAddress\VirtualIpAddress\bin\Debug\netcoreapp2.0\VirtualIpAddress.deps.json
+D:\project\VirtualIpAddress\VirtualIpAddress\bin\Debug\netcoreapp2.0\VirtualIpAddress.runtimeconfig.json
+D:\project\VirtualIpAddress\VirtualIpAddress\bin\Debug\netcoreapp2.0\VirtualIpAddress.runtimeconfig.dev.json
+D:\project\VirtualIpAddress\VirtualIpAddress\bin\Debug\netcoreapp2.0\VirtualIpAddress.dll
+D:\project\VirtualIpAddress\VirtualIpAddress\bin\Debug\netcoreapp2.0\VirtualIpAddress.pdb
+D:\project\VirtualIpAddress\VirtualIpAddress\obj\Debug\netcoreapp2.0\VirtualIpAddress.csprojResolveAssemblyReference.cache
+D:\project\VirtualIpAddress\VirtualIpAddress\obj\Debug\netcoreapp2.0\VirtualIpAddress.csproj.CoreCompileInputs.cache
+D:\project\VirtualIpAddress\VirtualIpAddress\obj\Debug\netcoreapp2.0\VirtualIpAddress.AssemblyInfoInputs.cache
+D:\project\VirtualIpAddress\VirtualIpAddress\obj\Debug\netcoreapp2.0\VirtualIpAddress.AssemblyInfo.cs
+D:\project\VirtualIpAddress\VirtualIpAddress\obj\Debug\netcoreapp2.0\VirtualIpAddress.dll
+D:\project\VirtualIpAddress\VirtualIpAddress\obj\Debug\netcoreapp2.0\VirtualIpAddress.pdb

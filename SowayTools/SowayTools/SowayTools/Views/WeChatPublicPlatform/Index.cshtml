@@ -1,0 +1,475 @@
+﻿
+@{
+    ViewBag.Title = "公众号菜单编辑";
+    ViewBag.ControllerName = "微信公众号";
+    ViewBag.ControllerUrl = "/home/index";
+}
+
+
+<link href="~/Content/wxmenu/base.css" rel="stylesheet" />
+<link href="~/Content/wxmenu/index.css" rel="stylesheet" />
+<link href="~/Content/wxmenu/lib.css" rel="stylesheet" />
+<link href="~/Content/wxmenu/media_dialog&emotion_editor&msg_tab&emoji&msg_sender&tooltip.css" rel="stylesheet" />
+
+
+
+<section class="content" id="menu_edit_view">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+
+                <div class="box-body">
+                    <div class="menu_setting_box js_menuBox dn" style="display: block;">
+                        <textarea id="result" style="border: none;position: absolute;width: 312px;height: 462px;left: 43px;top: 79px;top: 131px;ex: 2;word-break: break-all;"></textarea>
+                        <div class="menu_setting_area js_editBox">
+                            <div class="menu_preview_area">
+                                <div class="mobile_menu_preview">
+                                    <div class="mobile_hd tc" >菜单编辑
+                                    </div>
+                                    <div class="mobile_bd">
+                                        <ul class="pre_menu_list grid_line ui-sortable ui-sortable-disabled no_menu" style="z-index:3" id="menuList">
+
+                                            <!--ko foreach:button_data_array-->
+                                            <li class="jsMenu pre_menu_item grid_item jslevel1 size1of3 ui-sortable ui-sortable-disabled">
+                                                <a href="javascript:void(0);" class="" draggable="false" data-bind="click:function(data,event){koModel.button_click(data,event,koModel.button_data_array())} ">
+                                                    <i class="icon_menu_dot js_icon_menu_dot dn"></i>
+                                                    <i class="icon20_common sort_gray"></i>
+                                                    <span class='js_l1Title' data-bind="text:name"></span>
+                                                </a>
+                                                <div class="sub_pre_menu_box js_l2TitleBox" style="display:none;">
+                                                    <ul class="sub_pre_menu_list">
+                                                        <!--ko foreach:sub_button-->
+                                                        <li class='jslevel2'>
+                                                            <a href="javascript:void(0);" class="jsSubView" draggable="false" data-bind="click:function(data,event){koModel.sub_button_click(data,$parent)}">
+                                                                <span class="sub_pre_menu_inner js_sub_pre_menu_inner">
+                                                                    <i class="icon20_common sort_gray"></i>
+                                                                    <span class='js_l2Title' data-bind="text:name"></span>
+                                                                </span>
+                                                            </a>
+                                                        </li>
+                                                        <!--/ko-->
+                                                        <!--如果子菜单 数量等于5 则不显示-->
+                                                        <li class='js_addMenuBox' data-bind="visible:sub_button().length<5,click: $parent.add_sub_button">
+                                                            <a href="javascript:void(0);" class="jsSubView js_addL2Btn" title="最多添加5个子菜单" draggable="false">
+                                                                <span class="sub_pre_menu_inner js_sub_pre_menu_inner"><i class="icon14_menu_add"></i></span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                    <i class="arrow arrow_out"></i>
+                                                    <i class="arrow arrow_in"></i>
+                                                </div>
+                                            </li>
+                                            <!--/ko-->
+                                            <!--添加主菜单-->
+                                            <li class="js_addMenuBox pre_menu_item grid_item no_extra size1of1" data-bind="visible:button_data_array.length<3,click:add_button">
+                                                <a href="javascript:void(0);" class="js_addL1Btn" title="最多添加3个一级菜单" draggable="false">
+                                                    <i class="icon14_menu_add"></i> <span class="js_addMenuTips">添加菜单</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="menu_form_area" style="display:none;" data-bind="visible:koModel.choice_data().type()!='init'">
+                                @*<div id="js_none" class="menu_initial_tips tips_global" ></div>*@
+                                <div id="js_rightBox" class="portable_editor to_left">
+                                    <div class="editor_inner">
+                                        <div class="global_mod float_layout menu_form_hd js_second_title_bar">
+                                            <h4 class="global_info"> 菜单名称 </h4>
+                                            <div class="global_extra">
+                                                <a href="javascript:void(0);" id="jsDelBt" data-bind="click:remove_button">删除菜单 </a>
+                                                @*<a href="javascript:void(0);" id="jsDelBt">删除子菜单</a>*@
+                                            </div>
+                                        </div>
+                                        <div class="menu_form_bd" id="view">
+                                            <div id="js_innerNone" style="" class="msg_sender_tips tips_global"></div>
+                                            <div class="frm_control_group js_setNameBox">
+                                                <label for="" class="frm_label"> <strong class="title js_menuTitle">菜单名称</strong> </label>
+                                                <div class="frm_controls">
+                                                    <span class="frm_input_box with_counter counter_in append"> <input type="text" class="frm_input js_menu_name" value="" placeholder="请输入菜单名字" data-bind="value:koModel.choice_data().name" /> </span>
+                                                    <p class="frm_msg fail js_titleEorTips dn">字数超过上限</p>
+                                                    <p class="frm_msg fail js_titlenoTips dn" style="display: none;">请输入菜单名称</p>
+                                                    <p class="frm_tips js_titleNolTips">字数不超过4个汉字或8个字母</p>
+                                                </div>
+                                            </div>
+                                            <div class="frm_control_group" style="display:none;" data-bind="visible:koModel.choice_data().sub_button().length<1">
+                                                <label for="" class="frm_label"> <strong class="title js_menuContent">菜单内容</strong> </label>
+                                                <div class="frm_controls frm_vertical_pt">
+                                                    <label class="frm_radio_label js_radio_url selected" data-editing="0" data-bind="click:function(data,event){select_button_type(event,'view')},css:{selected:koModel.choice_data().type()=='view'}">
+                                                        <i class="icon_radio"></i> <span class="lbl_content">跳转网页</span> <input type="radio" name="hello" class="frm_radio" />
+                                                    </label>
+                                                    <label class="frm_radio_label js_radio_click" data-editing="0" data-bind="click:function(data,event){select_button_type(event,'click')},css:{selected:koModel.choice_data().type()=='click'}">
+                                                            <i class="icon_radio"></i> <span class="lbl_content">发送消息</span> <input type="radio" name="hello" class="frm_radio" />
+                                                        </label>
+                                                </div>
+                                            </div>
+
+
+
+
+
+                                            <div class="menu_content_container">
+                                                <div class="menu_content send jsMain" id="edit" style="display:none;">
+                                                    <div class="msg_sender" id="editDiv">
+                                                        <div class="msg_tab" style="display:none;">
+                                                            <div class="tab_navs_panel">
+                                                                <span class="tab_navs_switch_wrp switch_prev js_switch_prev">
+                                                                    <span class="tab_navs_switch"></span>
+                                                                </span>
+                                                                <span class="tab_navs_switch_wrp switch_next js_switch_next" style="display: none;"> <span class="tab_navs_switch"></span> </span>
+                                                                <div class="tab_navs_wrp" style="width:650px">
+                                                                    <ul class="tab_navs js_tab_navs" style="margin-left:0;">
+                                                                        <li class="tab_nav tab_appmsg width4" data-type="10" data-tab=".js_appmsgArea" data-tooltip="图文消息">
+                                                                            <a href="javascript:void(0);">
+                                                                                &nbsp;
+                                                                                <i class="icon_msg_sender"></i>
+                                                                                <span class="msg_tab_title">图文消息</span>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li class="tab_nav tab_img width4" data-type="2" data-tab=".js_imgArea" data-tooltip="图片">
+                                                                            <a href="javascript:void(0);">
+                                                                                &nbsp;
+                                                                                <i class="icon_msg_sender"></i>
+                                                                                <span class="msg_tab_title">图片</span>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li class="tab_nav tab_audio width4" data-type="3" data-tab=".js_audioArea" data-tooltip="语音">
+                                                                            <a href="javascript:void(0);">
+                                                                                &nbsp;
+                                                                                <i class="icon_msg_sender"></i>
+                                                                                <span class="msg_tab_title">语音</span>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li class="tab_nav tab_video width4 no_extra" data-type="15" data-tab=".js_videoArea" data-tooltip="视频">
+                                                                            <a href="javascript:void(0);">
+                                                                                &nbsp;
+                                                                                <i class="icon_msg_sender"></i>
+                                                                                <span class="msg_tab_title">视频</span>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li class="tab_nav">
+                                                                            <label>KEY:</label>
+                                                                            <input style="width:190px" type="text" value="">
+                                                                            <input style="width:190px" type="text" value="">
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+
+
+                                                            <div class="tab_panel" style="display:none;">
+                                                                <div class="tab_content">
+                                                                    <div class="js_appmsgArea inner ">
+                                                                        <!--type 10图文 2图片  3语音 15视频 11商品消息-->
+                                                                        <div class="tab_cont_cover jsMsgSendTab" data-index="0">
+                                                                            <div class="media_cover">
+                                                                                <span class="create_access">
+                                                                                    <a class="add_gray_wrp jsMsgSenderPopBt" href="javascript:void(0);" data-type="10" data-index="0">
+                                                                                        <i class="icon36_common add_gray"></i>
+                                                                                        <strong>从素材库中选择</strong>
+                                                                                    </a>
+                                                                                </span>
+                                                                            </div>
+                                                                            <div class="media_cover">
+                                                                                <span class="create_access">
+                                                                                    <a target="_blank" class="add_gray_wrp" href="javascript:void(0);"> <i class="icon36_common add_gray"></i> <strong>新建图文消息</strong> </a>
+
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="tab_content" style="display:none;">
+                                                                    <div class="js_imgArea inner ">
+                                                                        <!--type 10图文 2图片  3语音 15视频 11商品消息-->
+                                                                        <div class="tab_cont_cover jsMsgSendTab" data-index="1" data-type="2">
+                                                                            <div class="media_cover">
+                                                                                <span class="create_access"> <a class="add_gray_wrp jsMsgSenderPopBt" href="javascript:void(0);" data-type="2" data-index="1"> <i class="icon36_common add_gray"></i> <strong>从素材库中选择</strong> </a> </span>
+                                                                            </div>
+                                                                            <div class="media_cover">
+                                                                                <span class="create_access"> <a class="add_gray_wrp" id="msgSendImgUploadBt" data-type="2" href="javascript:void(0);"> <i class="icon36_common add_gray"></i> <strong>上传图片</strong> </a> </span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="tab_content" style="display:none;">
+                                                                    <div class="js_audioArea inner ">
+                                                                        <!--type 10图文 2图片  3语音 15视频 11商品消息-->
+                                                                        <div class="tab_cont_cover jsMsgSendTab" data-index="2" data-type="3">
+                                                                            <div class="media_cover">
+                                                                                <span class="create_access"> <a class="add_gray_wrp jsMsgSenderPopBt" href="javascript:void(0);" data-type="3" data-index="2"> <i class="icon36_common add_gray"></i> <strong>从素材库中选择</strong> </a> </span>
+                                                                            </div>
+                                                                            <div class="media_cover">
+                                                                                <span class="create_access"> <a class="add_gray_wrp " id="msgSendAudioUploadBt" href="javascript:void(0);"> <i class="icon36_common add_gray"></i> <strong>新建语音</strong> </a> </span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="tab_content" style="display:none;">
+                                                                    <div class="js_videoArea inner ">
+                                                                        <!--type 10图文 2图片  3语音 15视频 11商品消息-->
+                                                                        <div class="tab_cont_cover jsMsgSendTab" data-index="3">
+                                                                            <div class="media_cover">
+                                                                                <span class="create_access"> <a class="add_gray_wrp jsMsgSenderPopBt" href="javascript:void(0);" data-type="15" data-index="3"> <i class="icon36_common add_gray"></i> <strong>从素材库中选择</strong> </a> </span>
+                                                                            </div>
+                                                                            <div class="media_cover">
+                                                                                <span class="create_access"> <a target="_blank" class="add_gray_wrp" href="javascript:void(0);"> <i class="icon36_common add_gray"></i> <strong>新建视频</strong> </a> </span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+
+
+                                                        </div>
+                                                    </div>
+                                                    <p class="profile_link_msg_global menu_send mini_tips warn dn js_warn"> 请勿添加其他公众号的主页链接 </p>
+                                                </div>
+
+
+
+                                                <div class="menu_content url jsMain" id="url" style="display:none;" data-bind="visible:koModel.choice_data().sub_button().length<1">
+                                                    <form action="" id="urlForm" onsubmit="return false;" style="display:none;" data-bind="visible:koModel.choice_data().type()=='view'">
+                                                        <p class="menu_content_tips tips_global">订阅者点击该子菜单会跳到以下链接</p>
+                                                        <div class="frm_control_group">
+                                                            <label for="" class="frm_label">页面地址</label>
+                                                            <div class="frm_controls">
+                                                                <span class="frm_input_box"> <input type="text" class="frm_input" data-bind="value:koModel.choice_data().url" value="" /> </span>
+                                                                <p class="profile_link_msg_global menu_url mini_tips warn dn js_warn"> 请勿添加其他公众号的主页链接 </p>
+                                                                <p class="frm_tips" id="js_urlTitle" style="display: none;"> 来自<span class="js_name"></span><span style="display:none;"> -《<span class="js_title"></span>》</span> </p>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="frm_control_group btn_appmsg_wrap" style="display:none;">
+                                                            <div class="frm_controls">
+                                                                <p class="frm_msg fail dn" id="urlUnSelect" style="display: none;"> <span for="urlText" class="frm_msg_content" style="display: inline;">请选择一篇文章</span> </p>
+                                                                <a href="javascript:void(0);" id="js_appmsgPop">从公众号图文消息中选择</a>
+                                                                <a href="javascript:void(0);" class="dn btn btn_default" id="js_reChangeAppmsg">重新选择</a>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+
+
+                                                    <form action="" id="urlForm" onsubmit="return false;" style="display:none;" data-bind="visible:koModel.choice_data().type()=='click'">                                  
+                                                        <div class="frm_control_group">
+                                                            <label for="" class="frm_label">菜单KEY值</label>
+                                                            <div class="frm_controls">
+                                                                <span class="frm_input_box"> <input type="text" class="frm_input" data-bind="value:koModel.choice_data().key" value="" /> </span>
+                                                                <p class="frm_tips" id="js_urlTitle" style="display: none;"> 来自<span class="js_name"></span><span style="display:none;"> -《<span class="js_title"></span>》</span> </p>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+
+
+
+                                                <div class="menu_content sended" style="display:none;">
+                                                    <p class="menu_content_tips tips_global">订阅者点击该子菜单会跳到以下链接</p>
+                                                    <div class="msg_wrp" id="viewDiv"></div>
+                                                    <p class="frm_tips">来自<span class="js_name">素材库</span><span style="display:none;"> -《<span class="js_title"></span>》</span></p>
+                                                </div>
+                                                <div id="js_errTips" style="display:none;" class="msg_sender_msg mini_tips warn"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <span class="editor_arrow_wrp"> <i class="editor_arrow editor_arrow_out"></i> <i class="editor_arrow editor_arrow_in"></i> </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tool_bar tc js_editBox">
+                            <span id="pubBt" class="btn btn_input btn_primary" style="display: block;" data-bind="click:save"><button>保存并发布</button></span>
+                            <!--<a href="javascript:void(0);" class="btn btn_default" id="viewBt" style="display: block;">预览</a>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+<script src="~/Content/wxmenu/jquery.min.js"></script>
+<script type="text/javascript">
+
+    var viewmodel = function () {
+        var self = this;
+        self.data = ko.observable();
+        self.choice_data = ko.observable({ "type":ko.observable( "init"), "name":ko.observable( "介1"), "key": "V1001_TODAY_SINGER", "url": "", "sub_button": ko.observableArray([]) });
+        self.choice_parent_data = ko.observable();
+        self.button_data_array = [];
+        self.sub_button_flag = ko.observable(false);
+        self.init = function () {
+            $.ajax({
+                url: "/wechatpublicplatform/MenuEdit",
+                type: "post",
+                data: "",
+                async:false,
+                dataType: "json",
+                success: function (result) {
+                   var  data = result.Data;
+                    
+                    ko.utils.arrayForEach(data.menu.button, function (item) {
+                        console.log(item);
+                        var sub_array = [];
+                        ko.utils.arrayForEach(item.sub_button, function (sub_item) {
+                            var z = {
+                                name: ko.observable(sub_item.name),
+                                url: sub_item.url,
+                                type: ko.observable(sub_item.type),
+                                key: sub_item.key,
+                                sub_button: ko.observableArray(sub_item.sub_button)
+                            }
+                            sub_array.push(z);
+                        });
+                        var i = {
+                            sub_button: ko.observableArray(sub_array),
+                            name: ko.observable(item.name),
+                            url: item.url,
+                            type: ko.observable( item.type),
+                            key:item.key,
+                        };
+                        self.button_data_array.push(i);
+                    });
+
+                    self.button_data_array = ko.observableArray(self.button_data_array);
+                    console.log(self.button_data_array()[0]);
+
+                }
+            });
+            //var data = {
+            //    "gzh_name": '实时预览',
+            //    "menu": {
+            //        "button": [
+            //            { "type": "click", "name": "歌手简介1", "key": "V1001_TODAY_SINGER", "url": "", "sub_button": [] },
+            //            {
+            //                "name": "菜单", "sub_button": [
+            //                       { "type": "click", "name": "搜索", "key": "", "url": "http://www.soso.com/", "sub_button": [] },
+            //                       { "type": "click", "name": "视频", "key": "", "url": "http://v.qq.com/", "sub_button": [] },
+            //                       { "type": "click", "name": "赞一下我们", "key": "V1001_GOOD", "url": "", "sub_button": [] }
+            //                ]
+            //            }
+            //        ]
+            //    }
+            //};
+
+      
+        };
+
+        self.add_sub_button = function (data) {
+            //添加子菜单
+            var add_data = {
+                "type":ko.observable( "click"), "name": ko.observable("子菜单名称"), "key": "", "url": "", sub_button: ko.observableArray([])
+            };
+
+            data.sub_button.push(add_data);
+            console.log(add_data);
+            console.log(koModel.button_data_array());
+            self.set_choice_data(add_data, data, true);
+
+        };
+        self.add_button = function () {
+            //添加主菜单
+            self.arr = ko.observableArray([]);
+            var add_data = { "type": ko.observable("click"), "name": ko.observable("菜单名称"), "key": "", "url": "", "sub_button": ko.observableArray([]) };
+            koModel.button_data_array.push(add_data);
+            self.set_choice_data(add_data, koModel.button_data_array(), false);
+        };
+        self.select_button_type = function (event, type) {
+            console.log(type);
+            console.log(event);
+            koModel.choice_data().type(type);
+            $(event.currentTarget).parent().find(".frm_radio_label").removeClass("selected");
+            $(event.currentTarget).addClass('selected');
+        };
+        self.button_click = function (data, dom, parent) {
+            //点击底部菜单时显示主菜单
+            var display = $(dom.currentTarget).next().css('display');
+            $(".js_l2TitleBox").css("display", "none");
+            if (display == "none") {
+                $(dom.currentTarget).next().css("display", "block");
+            }
+            else {
+                $(dom.currentTarget).next().css("display", "none");
+            }
+            self.set_choice_data(data, parent, false);
+        };
+        self.sub_button_click = function (data, parent) {
+            self.set_choice_data(data, parent, true);
+        };
+
+        self.set_choice_data = function (data, parent, flag) {
+            koModel.choice_data(data);
+            koModel.choice_parent_data(parent);
+            koModel.sub_button_flag(flag);
+            console.log(data);
+            console.log(parent);
+
+        };
+        self.remove_button = function (data) {
+            console.log(koModel.sub_button_flag());
+
+            if (koModel.sub_button_flag()) {
+                koModel.choice_parent_data().sub_button.remove(koModel.choice_data());
+                if (koModel.choice_parent_data().sub_button().length > 0) {
+                    koModel.choice_data(koModel.choice_parent_data().sub_button()[0]);
+                }
+                else {
+                    koModel.choice_data(koModel.choice_parent_data());
+                    koModel.sub_button_flag(false);
+                }
+                console.log(koModel.choice_parent_data().sub_button);
+                console.log(koModel.choice_data());
+                return;
+            }
+            koModel.button_data_array.remove(koModel.choice_data());
+            if (koModel.button_data_array().length > 0) {
+                koModel.choice_data(koModel.button_data_array()[0]);
+            }
+        };
+        self.save = function () {
+            var request_data = [];
+            var btn_data = koModel.button_data_array();
+            for (var i = 0; i < btn_data.length; i++) {
+                var sub_btn_data = [];
+                if (btn_data[i].sub_button().length > 0) {
+                    for (var j = 0; j < btn_data[i].sub_button().length; j++) {
+                        console.log(btn_data[i].sub_button());
+                        sub_btn_data.push({ name: btn_data[i].sub_button()[j].name(), type: btn_data[i].sub_button()[j].type(), url: btn_data[i].sub_button()[j].url,key:btn_data[i].sub_button()[j].key, sub_button: btn_data[i].sub_button()[j].sub_button() })
+                    }
+                }
+                var sub_data = { name: btn_data[i].name(), type: btn_data[i].type, url: btn_data[i].url, key:btn_data[i].key,sub_button: sub_btn_data };
+                console.log(btn_data[i]);
+                request_data.push(sub_data);
+            }
+            if (request_data.length <= 0) {
+                alert("请先填写菜单信息");
+                return;
+            }
+            var datas = [{ button: "sad" }, { button: "ee" }];
+            $.ajax({
+                url: "/wechatpublicplatform/Update",
+                type: "post",
+                data: { body: {button:request_data} },
+                dataType: "json",
+                success: function (result) {
+                    console.log(result);
+                    if (!result.IsSuccess) {
+                        alert(result.Message);
+                    }
+                }
+            });
+
+            console.log(request_data);
+        }
+
+        self.init();
+    }
+    var koModel = new viewmodel();
+    ko.applyBindings(koModel, document.getElementById("menu_edit_view"));
+
+
+
+</script>

@@ -1,0 +1,14 @@
+D:\project\Voting\VotingWeb\bin\Debug\netcoreapp2.0\win7-x64\hostpolicy.dll
+D:\project\Voting\VotingWeb\bin\Debug\netcoreapp2.0\win7-x64\hostfxr.dll
+D:\project\Voting\VotingWeb\bin\Debug\netcoreapp2.0\win7-x64\VotingWeb.exe
+D:\project\Voting\VotingWeb\bin\Debug\netcoreapp2.0\win7-x64\VotingWeb.deps.json
+D:\project\Voting\VotingWeb\bin\Debug\netcoreapp2.0\win7-x64\VotingWeb.runtimeconfig.json
+D:\project\Voting\VotingWeb\bin\Debug\netcoreapp2.0\win7-x64\VotingWeb.runtimeconfig.dev.json
+D:\project\Voting\VotingWeb\bin\Debug\netcoreapp2.0\win7-x64\VotingWeb.dll
+D:\project\Voting\VotingWeb\bin\Debug\netcoreapp2.0\win7-x64\VotingWeb.pdb
+D:\project\Voting\VotingWeb\obj\Debug\netcoreapp2.0\win7-x64\VotingWeb.csprojResolveAssemblyReference.cache
+D:\project\Voting\VotingWeb\obj\Debug\netcoreapp2.0\win7-x64\VotingWeb.csproj.CoreCompileInputs.cache
+D:\project\Voting\VotingWeb\obj\Debug\netcoreapp2.0\win7-x64\VotingWeb.AssemblyInfoInputs.cache
+D:\project\Voting\VotingWeb\obj\Debug\netcoreapp2.0\win7-x64\VotingWeb.AssemblyInfo.cs
+D:\project\Voting\VotingWeb\obj\Debug\netcoreapp2.0\win7-x64\VotingWeb.dll
+D:\project\Voting\VotingWeb\obj\Debug\netcoreapp2.0\win7-x64\VotingWeb.pdb
